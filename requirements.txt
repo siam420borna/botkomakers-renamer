@@ -1,0 +1,12 @@
+pyromod
+TgCrypto
+motor
+dnspython
+hachoir
+Pillow
+aiohttp
+pytz
+Flask
+gunicorn
+aiohttp
+pyrogram

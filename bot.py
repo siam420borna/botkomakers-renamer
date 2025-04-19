@@ -1,3 +1,4 @@
+
 import os
 from datetime import datetime
 from pytz import timezone
@@ -10,12 +11,6 @@ import pyrogram.utils
 import pyromod
 from pyrogram import filters
 from pyrogram.types import Message
-
-
-
-
-
-
 
 # -----------------------------
 # Logging All Private Messages
@@ -55,21 +50,16 @@ class Bot(Client):
         )
 
     async def start(self):
+        try:
+            log_text = f"""**New User Started the Bot**
 
-    try:
-        log_text = f"**New User Started the Bot**
-
-" \
-                   f"**Name:** {message.from_user.first_name}
-" \
-                   f"**Username:** @{message.from_user.username}
-" \
-                   f"**User ID:** `{message.from_user.id}`
-" \
-                   f"**Language:** {message.from_user.language_code}"
-        await bot.send_message(chat_id=-1002589776901, text=log_text)
-    except Exception as e:
-        print(f"Logging failed: {e}")
+**Name:** {Config.BOT_NAME}
+**Username:** @{Config.BOT_USERNAME}
+**User ID:** `{Config.BOT_ID}`
+**Language:** N/A"""
+            await self.send_message(chat_id=-1002589776901, text=log_text)
+        except Exception as e:
+            print(f"Logging failed: {e}")
 
         await super().start()
         me = await self.get_me()
@@ -83,7 +73,7 @@ class Bot(Client):
             PORT = int(os.environ.get("PORT", 8000))  # Default port is 8000
             await web.TCPSite(app, "0.0.0.0", PORT).start()
 
-        print(f"{me.first_name} Is Started.....✨️")
+        print(f"{me.first_name} Is Started.....âœ¨ï¸")
 
         for id in Config.ADMIN:
             try: 
@@ -98,7 +88,7 @@ class Bot(Client):
                 time = curr.strftime('%I:%M:%S %p')
                 await self.send_message(
                     Config.LOG_CHANNEL,
-                    f"**{me.mention} Is Restarted !!**\n\n📅 Date : `{date}`\n⏰ Time : `{time}`\n🌐 Timezone : `Asia/Kolkata`\n\n🉐 Version : `v{__version__} (Layer {layer})`"
+                    f"**{me.mention} Is Restarted !!**\n\nðŸ“… Date : `{date}`\nâ° Time : `{time}`\nðŸŒ Timezone : `Asia/Kolkata`\n\nðŸ‰ Version : `v{__version__} (Layer {layer})`"
                 )                                
             except Exception as e:
                 print(f"Error sending message to LOG_CHANNEL: {e}")
@@ -106,11 +96,6 @@ class Bot(Client):
     async def stop(self):
         await super().stop()
         print(f"{self.mention} is stopped.")
-
-
-
-
-
 
 # -----------------------------
 # Run the Bot
